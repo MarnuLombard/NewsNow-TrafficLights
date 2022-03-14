@@ -4,16 +4,26 @@ services:
   database:
     image: mysql:8-debian
     env_file:
-      - ./.env
+      - .env
     volumes:
       - type: bind
-        source: ./database/data
+        source: ./containers/database/data
         target: /var/lib/mysql
+    healthcheck:
+      test: mysqladmin ping -h 127.0.0.1 -u $$MYSQL_USER --password=$$MYSQL_PASSWORD
   application:
-    build: ./application
-    image: newsnow_app:latest
+    build:
+      context: ./
+      dockerfile: ./containers/application/Dockerfile
+      target: application
+    image: newsnow_application:latest
     ports:
       - "80:8888"
-    user: "node"
+    user: "www-data"
+    links:
+      - database
     environment:
-      - DATABASE_URL="mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@database:3306/${MYSQL_DATABASE}"
+      - DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@database:3306/${MYSQL_DATABASE}
+    depends_on:
+      database:
+        condition: service_healthy

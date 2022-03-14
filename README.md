@@ -1,5 +1,33 @@
 ## NewsNow
-# Full Stack Developer Exercise
+#### Full Stack Developer Exercise
+
+---
+*Please see `./app/README.md` and `./containers/README.md` for rationale and an explanation of the approaches I took*
+
+---
+# Running:
+
+Ensure that you have `docker` and `docker-compose` installed on your system.
+
+The database password myst be generated.
+If you are on a *nix system, I recommend doing:
+```bash
+openssl rand -base64 20 | sed 's/[^A-Z a-z 0-9]//g' awk '{print "MYSQL_PASSWORD="$1}' >> .env
+```
+
+Then start the container:
+```bash
+docker-compose up
+```
+*Make sure you don't have something else bound to port 80 on your system.*
+
+And head over to [http://localhost](http://localhost/).  
+You will be redirected to the `/client` path to view the dashboard (brief stated that this should be the path that serves the dashboard).
+
+
+---
+
+# Brief:
 
 *All code you send us should be entirely your own (although you may make use of publicly available libraries), should be of the quality you would expect to submit for a real NewsNow project and must remain confidential, so may not be published online.*
 
