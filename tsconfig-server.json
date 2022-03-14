@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "types": [
+      "node",
+    ],
+    "lib": [
+      "esnext"
+    ],
+    "outDir": "./dist/server"
+  },
+  "include": [
+    "src/server/**/*.ts",
+    "tests/server/**/*.ts",
+  ],
+}

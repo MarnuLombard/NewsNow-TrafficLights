@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "strict": true,
+    "baseUrl": "./",
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "useDefineForClassFields": true,
+    "paths": {
+      "@/*": [
+        "src/*",
+      ],
+    },
+    "typeRoots": [
+      "node_modules/@types",
+    ],
+  },
+  "include": [
+    "src/**/*",
+    "node_modules/.prisma/**/*",
+  ],
+  "exclude": [
+    "node_modules",
+  ],
+}

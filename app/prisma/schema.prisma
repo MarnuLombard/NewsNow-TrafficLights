@@ -1,0 +1,33 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model TrafficLight {
+  id            Int        @id @default(autoincrement())
+  uuid          String     @unique @default(uuid())
+  name          String     @unique @db.VarChar(255)
+  dashboardId   Int
+  dashboard     Dashboard  @relation(fields: [dashboardId], references: [id])
+
+  @@index([uuid])
+  @@index([name])
+}
+
+model Dashboard {
+  id            Int        @id @default(autoincrement())
+  uuid          String     @unique @default(uuid())
+  name          String     @unique @db.VarChar(255)
+  default       Boolean    @db.TinyInt()
+  trafficLights TrafficLight[]
+
+  @@index([uuid])
+  @@index([name])
+}

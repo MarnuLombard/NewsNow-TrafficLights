@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  database:
+    image: mysql:8-debian
+    env_file:
+      - ./.env
+    volumes:
+      - type: bind
+        source: ./database/data
+        target: /var/lib/mysql
+  application:
+    build: ./application
+    image: newsnow_app:latest
+    ports:
+      - "80:8888"
+    user: "node"
+    environment:
+      - DATABASE_URL="mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@database:3306/${MYSQL_DATABASE}"
